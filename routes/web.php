@@ -25,6 +25,8 @@ Route::post('/store-details', [DetailsController::class, 'store']);
 
 Route::get('/send-mail', [MailController::class, 'index']);
 Route::get('/token', [TokenController::class, 'index']);
+Route::post('/verify-token', [TokenController::class, 'store']);
+
 // Route::get('/send-mail', [MailController::class, 'index']);
 
 // Route::get('/details', function () {

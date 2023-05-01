@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Details;
 
 class TokenController extends Controller
 {
@@ -15,10 +16,20 @@ class TokenController extends Controller
     {
         $details=new Details;
         // dd($request->email);
-        $user=Details::find($request->email);
+        // $user=Details::find($request->email);
         //dd($user);
-        
-        // $details->save();
+        $user=Details::where('email', '=', session('email'))->firstOrFail();
+        if($request->token==$user->token)
+        {
+            $user->status="verified";
+            $user->save();
+            return redirect('details');
+        }
+        else 
+        {
+            return redirect('details');
+        }
+         // $details->save();
         return redirect('details');
     }
 }
